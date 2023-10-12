@@ -36,7 +36,12 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        try {
+            $data = Category::get();
+            return response()->json(['status' => true, 'message' => 'Success', 'data' => $data]);
+        } catch (Exception | PDOException $e) {
+            return response()->json(['status' => false, 'message' => 'Gagal meanmpilkan data']);
+        }
     }
 
     /**
